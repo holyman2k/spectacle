@@ -64,8 +64,15 @@
 //        calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 2.0f);
 //        calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 2.0f);
         // updated by me to modify size of window at 4 corner
-        calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 1.35f);
-        calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 1.35f);
+
+        if (action == SpectacleWindowActionLowerRight || action == SpectacleWindowActionLowerLeft) {
+            calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 2.0f);
+            calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 2.0f);
+        } else {
+            calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 1.5f);
+            calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 1.5f);
+        }
+
     } else if (!MovingToCenterRegionOfDisplay(action) && !MovingToThirdOfDisplay(action)) {
         calculatedWindowRect.size.width = visibleFrameOfScreen.size.width;
         calculatedWindowRect.size.height = visibleFrameOfScreen.size.height;
