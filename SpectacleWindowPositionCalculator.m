@@ -18,10 +18,17 @@
 
 + (CGRect)calculateWindowRect: (CGRect)windowRect visibleFrameOfScreen: (CGRect)visibleFrameOfScreen action: (SpectacleWindowAction)action {
     CGRect calculatedWindowRect = windowRect;
+
+    // modified by me to
+    if (MovingToCenterRegionOfDisplay(action)) {
+        calculatedWindowRect.size.width = visibleFrameOfScreen.size.width * .875;
+        calculatedWindowRect.size.height = visibleFrameOfScreen.size.height * .875;
+    }
     
     if ((action >= SpectacleWindowActionRightHalf) && (action <= SpectacleWindowActionLowerRight)) {
         calculatedWindowRect.origin.x = visibleFrameOfScreen.origin.x + floor(visibleFrameOfScreen.size.width / 2.0f);
     } else if (MovingToCenterRegionOfDisplay(action)) {
+//        calculatedWindowRect.origin.x = floor(visibleFrameOfScreen.size.width / 2.0f) - floor(calculatedWindowRect.size.width / 2.0f) + visibleFrameOfScreen.origin.x;
         calculatedWindowRect.origin.x = floor(visibleFrameOfScreen.size.width / 2.0f) - floor(calculatedWindowRect.size.width / 2.0f) + visibleFrameOfScreen.origin.x;
     } else if (!MovingToThirdOfDisplay(action)) {
         calculatedWindowRect.origin.x = visibleFrameOfScreen.origin.x;
@@ -30,6 +37,7 @@
     if (MovingToTopRegionOfDisplay(action)) {
         calculatedWindowRect.origin.y = visibleFrameOfScreen.origin.y + floor(visibleFrameOfScreen.size.height / 2.0f);
     } else if (MovingToCenterRegionOfDisplay(action)) {
+//        calculatedWindowRect.origin.y = floor(visibleFrameOfScreen.size.height / 2.0f) - floor(calculatedWindowRect.size.height / 2.0f) + visibleFrameOfScreen.origin.y;
         calculatedWindowRect.origin.y = floor(visibleFrameOfScreen.size.height / 2.0f) - floor(calculatedWindowRect.size.height / 2.0f) + visibleFrameOfScreen.origin.y;
     } else if (!MovingToThirdOfDisplay(action)) {
         calculatedWindowRect.origin.y = visibleFrameOfScreen.origin.y;
@@ -53,8 +61,11 @@
         calculatedWindowRect.size.width = visibleFrameOfScreen.size.width;
         calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 2.0f);
     } else if (MovingToUpperOrLowerLeftOfDisplay(action) || MovingToUpperOrLowerRightDisplay(action)) {
-        calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 2.0f);
-        calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 2.0f);
+//        calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 2.0f);
+//        calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 2.0f);
+        // updated by me to modify size of window at 4 corner
+        calculatedWindowRect.size.width = floor(visibleFrameOfScreen.size.width / 1.35f);
+        calculatedWindowRect.size.height = floor(visibleFrameOfScreen.size.height / 1.35f);
     } else if (!MovingToCenterRegionOfDisplay(action) && !MovingToThirdOfDisplay(action)) {
         calculatedWindowRect.size.width = visibleFrameOfScreen.size.width;
         calculatedWindowRect.size.height = visibleFrameOfScreen.size.height;
