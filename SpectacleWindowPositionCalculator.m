@@ -21,8 +21,8 @@
 
     // modified by me to
     if (MovingToCenterRegionOfDisplay(action)) {
-        calculatedWindowRect.size.width = visibleFrameOfScreen.size.width * .875;
-        calculatedWindowRect.size.height = visibleFrameOfScreen.size.height * .875;
+        calculatedWindowRect.size.width = visibleFrameOfScreen.size.width * .84;
+        calculatedWindowRect.size.height = visibleFrameOfScreen.size.height * .84;
     }
     
     if ((action >= SpectacleWindowActionRightHalf) && (action <= SpectacleWindowActionLowerRight)) {
